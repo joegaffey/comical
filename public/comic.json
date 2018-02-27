@@ -1,0 +1,54 @@
+{ 
+  "title": "My Comic",
+  "layout": [
+    "a1 a1 a1 a1 a1 a1",
+    "b1 b1 b1 b1 b2 b2",
+    "c1 c1 c1 c2 c2 c2",
+    "d1 d1 d2 d2 d3 d3",
+    "e1 e1 e1 e2 e2 e2"
+  ],
+  "panels": [
+    {
+      "placement": "a1",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/0/02/Andrew_Coffey_-_Illustration_1.jpg"
+    },
+    {
+      "placement": "b1",
+      "caption": "Caption text can be looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/0/02/Andrew_Coffey_-_Illustration_1.jpg"
+    },
+    {
+      "placement": "b2",
+      "caption": "...or short",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/0/02/Andrew_Coffey_-_Illustration_1.jpg"
+    },
+    {
+      "placement": "c1",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/0/02/Andrew_Coffey_-_Illustration_1.jpg"
+    },
+    {
+      "placement": "c2",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/0/02/Andrew_Coffey_-_Illustration_1.jpg"
+    },
+    {
+      "placement": "d1",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/0/02/Andrew_Coffey_-_Illustration_1.jpg"
+    },
+    {
+      "placement": "d2",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/0/02/Andrew_Coffey_-_Illustration_1.jpg"
+    },
+    {
+      "placement": "d3",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/0/02/Andrew_Coffey_-_Illustration_1.jpg"
+    },
+    {
+      "placement": "e1",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/0/02/Andrew_Coffey_-_Illustration_1.jpg"
+    },
+    {
+      "placement": "e2",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/0/02/Andrew_Coffey_-_Illustration_1.jpg"
+    }
+  ]    
+}
