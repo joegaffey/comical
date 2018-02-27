@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+* {
+  font-family: "Comic Sans MS";
+}
+  
+h1 {
+  margin: auto;
+  text-align: center;
+}
+  
+.comic-page {
+  display: grid;
+  grid-gap: 10px;
+  background-color: #fff;
+  width: 1000px;
+  margin: auto;
+}
+  
+.comic-page > div {
+  text-align: center;
+  font-size: 30px;
+}
+
+.controls {
+  width: 100%;
+  text-align: center;
+}
+  
+.panel {
+  background-color: #eee;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center; 
+  border-color: #555;
+  border-style: solid;
+  border-width: 1px;
+  height: 250px;
+  position: relative;
+}
+  
+.panel > .caption {
+  background-color: #fff;
+  border-color: #555;
+  border-style: solid;
+  border-width: 1px;
+  position: absolute; 
+  bottom: 0px; 
+  font-size: 16px;
+  text-align: left;
+  padding: 4px;
+  margin-left: -1px;
+  margin-right: -1px;
+  margin-bottom: -1px;
+  max-width: calc(100% - 8px);
+  overflow-wrap: break-word;
+}  
+</style>
+</head>
+<body onload="fetchComicData()">
+  <div class="comic-page"></div>
+  <p class="controls">
+    <a href="https://glitch.com/edit/#!/comical">Edit</a>
+  </p>
+</body>
+  
+<script>
+  function fetchComicData() {
+    fetch("comic.json")
+      .then(response => response.json())
+      .then(json => buildComic(json));
+  }
+  
+  function buildComic(data) {
+    if(data.title) { 
+      let markup = `<h1 class="title">${data.title}</h1>`;
+      document.body.insertAdjacentHTML('afterbegin', markup);
+    }
+    
+    let layout = '';
+    data.layout.forEach(row => {
+      layout += `"${row}" `;
+    });
+    document.querySelector('.comic-page').style.gridTemplateAreas = layout;
+    
+    let page = document.querySelector('.comic-page');
+    data.panels.forEach(panel => {
+      let markup = `
+        <div class="panel">
+         ${panel.caption ? `<div class="caption">${panel.caption}</div>` : ''}
+        </div>`;
+      page.insertAdjacentHTML('beforeend', markup);
+      page.lastChild.style.backgroundImage = `url(${panel.image})`;
+      page.lastChild.style.gridArea = panel.placement;
+    });
+  }
+</script>
+</html>
