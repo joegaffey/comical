@@ -66,7 +66,6 @@ h1 {
   top: 50px;
   left: 50%;
   margin-left:-300px;
-  overflow: scroll;
   display: none;
 }
   
@@ -81,7 +80,7 @@ h1 {
     <button onclick="toggleEditor()">Edit</button>
     <button id="apply" onclick="apply()" disabled>Apply</button>
     <button id="close" onclick="toggleEditor()" disabled>Close</button>
-    <button id="save" onclick="save()" disabled>Save</button>
+<!--     <button id="save" onclick="save()" disabled>Save</button> -->
     
   </p>
   <h1 class="title"></h1>
@@ -94,7 +93,17 @@ h1 {
   
 <script>  
   var editorEl = document.getElementById('jsoneditor');
-  var options = {};
+  
+  var options = {
+    mode: 'tree',
+    modes: ['code', 'form', 'text', 'tree'], 
+    onError: function (err) {
+      alert(err.toString());
+    },
+    onModeChange: function (newMode, oldMode) {
+      console.log('Mode switched from', oldMode, 'to', newMode);
+    }
+  };
   var editor = new JSONEditor(editorEl, options);
   
   var applyEl = document.getElementById('apply');
