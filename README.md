@@ -11,6 +11,8 @@ ToDo:
 * Multiple pages
 * Column layout
 * Free layout
+* Caption positioning
+* Non-rectangular panels
 * Page background image
 * Customizable styles and themes
 * Print styles

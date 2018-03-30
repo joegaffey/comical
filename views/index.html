@@ -57,35 +57,100 @@ h1 {
   max-width: calc(100% - 8px);
   overflow-wrap: break-word;
 }  
+  
+.editor {
+  position: absolute;
+  background-color: #eeeeee;
+  width: 600px;
+  height: 600px;
+  top: 50px;
+  left: 50%;
+  margin-left:-300px;
+  overflow: scroll;
+  display: none;
+}
+  
+.title {
+  display: none;
+}
+  
 </style>
 </head>
 <body onload="fetchComicData()">
-  <div class="comic-page"></div>
   <p class="controls">
-    <a href="https://glitch.com/edit/#!/comical">Edit</a>
+    <button onclick="toggleEditor()">Edit</button>
+    <button id="apply" onclick="apply()" disabled>Apply</button>
+    <button id="close" onclick="toggleEditor()" disabled>Close</button>
+    <button id="save" onclick="save()" disabled>Save</button>
+    
   </p>
+  <h1 class="title"></h1>
+  <div class="comic-page"></div>
+  <div class="editor" id="jsoneditor"></div>
 </body>
   
-<script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.14.1/jsoneditor.min.css"  rel="stylesheet" type="text/css">
+<script src=" https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.14.1/jsoneditor.min.js"></script>
+  
+<script>  
+  var editorEl = document.getElementById('jsoneditor');
+  var options = {};
+  var editor = new JSONEditor(editorEl, options);
+  
+  var applyEl = document.getElementById('apply');
+  var closeEl = document.getElementById('close');
+  var saveEl = document.getElementById('save');
+  
+  function toggleEditor() {
+    if(editorEl.style.display == "block") {
+      editorEl.style.display = 'none';
+      applyEl.disabled = true;
+      closeEl.disabled = true;
+      saveEl.disabled = true;
+    }
+    else { 
+      editorEl.style.display = 'block';
+      applyEl.disabled = false;
+      closeEl.disabled = false;
+      saveEl.disabled = false;
+    }
+  }
+  
+  function save() {
+    alert('Coming soon!');
+  }
+  
+  function apply() {
+    buildComic(editor.get());
+  }
+  
   function fetchComicData() {
     fetch("comic.json")
       .then(response => response.json())
       .then(json => buildComic(json));
   }
   
+  var comicData = {}; 
+  
   function buildComic(data) {
-    if(data.title) { 
-      let markup = `<h1 class="title">${data.title}</h1>`;
-      document.body.insertAdjacentHTML('afterbegin', markup);
-    }
+    comicData = data;
+    editor.set(data);
+    
+    let page = document.querySelector('.comic-page');
+    page.innerHTML = '';
     
     let layout = '';
     data.layout.forEach(row => {
       layout += `"${row}" `;
     });
-    document.querySelector('.comic-page').style.gridTemplateAreas = layout;
+    page.style.gridTemplateAreas = layout;
     
-    let page = document.querySelector('.comic-page');
+    if(data.title) { 
+      let title = document.querySelector('.title');
+      title.innerHTML = data.title;
+      title.style.display = 'block';
+    }
+    
     data.panels.forEach(panel => {
       let markup = `
         <div class="panel">
