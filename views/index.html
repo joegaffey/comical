@@ -74,6 +74,10 @@ h1 {
 }
   
 </style>
+  
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.14.1/jsoneditor.min.css"  rel="stylesheet" type="text/css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.14.1/jsoneditor.min.js"></script>
+<script src="schema.js"></script>
 </head>
 <body onload="fetchComicData()">
   <p class="controls">
@@ -87,15 +91,14 @@ h1 {
   <div class="comic-page"></div>
   <div class="editor" id="jsoneditor"></div>
 </body>
-  
-<link href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.14.1/jsoneditor.min.css"  rel="stylesheet" type="text/css">
-<script src=" https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.14.1/jsoneditor.min.js"></script>
-  
+    
 <script>  
+
   var editorEl = document.getElementById('jsoneditor');
   
   var options = {
     mode: 'tree',
+    schema: schema,
     modes: ['code', 'form', 'text', 'tree'], 
     onError: function (err) {
       alert(err.toString());
@@ -115,13 +118,13 @@ h1 {
       editorEl.style.display = 'none';
       applyEl.disabled = true;
       closeEl.disabled = true;
-      saveEl.disabled = true;
+      // saveEl.disabled = true;
     }
     else { 
       editorEl.style.display = 'block';
       applyEl.disabled = false;
       closeEl.disabled = false;
-      saveEl.disabled = false;
+      // saveEl.disabled = false;
     }
   }
   
@@ -154,10 +157,15 @@ h1 {
     });
     page.style.gridTemplateAreas = layout;
     
+    let title = document.querySelector('.title');
+      
     if(data.title) { 
-      let title = document.querySelector('.title');
       title.innerHTML = data.title;
       title.style.display = 'block';
+    }
+    else {
+      title.innerHTML = '';
+      title.style.display = 'none';
     }
     
     data.panels.forEach(panel => {
