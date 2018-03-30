@@ -74,6 +74,10 @@ h1 {
 }
   
 </style>
+  
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.14.1/jsoneditor.min.css"  rel="stylesheet" type="text/css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.14.1/jsoneditor.min.js"></script>
+<script src="schema.js"></script>
 </head>
 <body onload="fetchComicData()">
   <p class="controls">
@@ -87,29 +91,9 @@ h1 {
   <div class="comic-page"></div>
   <div class="editor" id="jsoneditor"></div>
 </body>
-  
-<link href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.14.1/jsoneditor.min.css"  rel="stylesheet" type="text/css">
-<script src=" https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.14.1/jsoneditor.min.js"></script>
-  
+    
 <script>  
-  
-  var schema = {
-    "title": "Comic Schema",
-    "type": "object",
-    "properties": {
-      "title": {
-        "type": "string"
-      },
-      "layout": {
-        "type": "array"
-      },
-      "panels": {
-        "type": "array"
-      },
-    },
-    "required": ["layout", "panels"]
-  };
-  
+
   var editorEl = document.getElementById('jsoneditor');
   
   var options = {
